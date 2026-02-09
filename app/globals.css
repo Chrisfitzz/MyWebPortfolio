@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #0b0c2a; /* deep midnight blue */
+  --accent: #e63b1f; /* crimson */
+  --cream: #f4efea; /* light text */
+  --muted: #9a8f88; /* secondary text */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-main);
+  color: var(--cream);
+  font-family: Inter, system-ui, sans-serif;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  scroll-snap-align: start;
+}
