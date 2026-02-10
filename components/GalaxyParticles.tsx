@@ -55,12 +55,13 @@ export default function GalaxyParticles() {
         const y = h / 2 + Math.sin(p.angle) * p.radius;
 
         // ⭐ Slightly reduced alpha intensity
-        let base =
+        const base =
             p.color === "pink"
                 ? 0.28 + 0.16 * Math.sin(time / 500 + p.twinkleOffset)
                 : p.color === "teal"
                     ? 0.22 + 0.14 * Math.sin(time / 550 + p.twinkleOffset)
                     : 0.16 + 0.09 * Math.sin(time / 700 + p.twinkleOffset);
+
 
         let alpha = Math.max(0, Math.min(1, base));
 
