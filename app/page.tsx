@@ -15,6 +15,7 @@ export default function Home() {
 
     const [activeSection, setActiveSection] = useState<string>("home");
 
+    // Scroll-spy to highlight active section in header
     useEffect(() => {
         const sections = [
             { id: "home", ref: homeRef },
@@ -25,7 +26,6 @@ export default function Home() {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                // Pick the entry with the largest intersectionRatio
                 const visible = entries
                     .filter((e) => e.isIntersecting)
                     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -40,7 +40,7 @@ export default function Home() {
                 }
             },
             {
-                threshold: Array.from({ length: 101 }, (_, i) => i / 100), // 0,0.01,0.02 ... 1
+                threshold: Array.from({ length: 101 }, (_, i) => i / 100),
             }
         );
 

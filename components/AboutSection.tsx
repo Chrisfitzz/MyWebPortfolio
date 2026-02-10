@@ -1,49 +1,83 @@
 "use client";
 
-import React, { forwardRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { forwardRef, useState } from "react";
 
-type AboutSectionProps = {};
+interface ContactSectionProps {
+    id?: string;
+}
 
-const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
+const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
     (props, ref) => {
+        const [formData, setFormData] = useState({
+            name: "",
+            email: "",
+            message: "",
+        });
+
+        const handleChange = (
+            e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        ) => {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
+        };
+
+        const handleSubmit = (e: React.FormEvent) => {
+            e.preventDefault();
+            alert(
+                "Message submitted! (In a real app, this would send an email.)"
+            );
+            setFormData({ name: "", email: "", message: "" });
+        };
+
         return (
             <section
                 ref={ref}
-                className="h-screen flex flex-col justify-center items-center text-center px-6 bg-[var(--bg-main)] scroll-snap-start"
+                id={props.id}
+                className="min-h-screen flex flex-col justify-center items-center px-6 bg-[var(--bg-main)] scroll-snap-start"
             >
-                <h2 className="text-4xl font-bold mb-6 text-[var(--cream)]">
-                    About Me
-                </h2>
-
-                <p className="max-w-3xl text-[var(--muted)] leading-relaxed">
-                    Hi! I’m Chris, a frontend engineer with a passion for crafting modern
-                    web experiences. I build elegant and responsive web applications using
-                    React, Next.js, and Tailwind CSS.
-                    <br />
-                    <br />
-                    I enjoy exploring design systems, subtle animations, and clean user
-                    interfaces.
-                    <br />
-                    <br />
-                    When I’m not building applications, you'll find me DJing, taking
-                    photographs or having coffee with friends — all of which inspire me to
-                    create better experiences for users.
-                </p>
-
-                {/* View CV link */}
-                <a
-                    href="/MyCV.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex items-center gap-2 text-[var(--accent)] hover:text-red-600 transition"
+                <h2 className="text-4xl font-bold mb-8 text-[var(--cream)]">Contact</h2>
+                <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col gap-4 w-full max-w-lg"
                 >
-                    View CV <ArrowUpRight size={18} />
-                </a>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
+                        required
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Your Email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
+                        required
+                    />
+                    <textarea
+                        name="message"
+                        placeholder="Your Message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        rows={5}
+                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
+                        required
+                    />
+                    <button
+                        type="submit"
+                        className="px-6 py-3 bg-[var(--accent)] text-white font-medium hover:bg-black transition"
+                    >
+                        Send Message
+                    </button>
+                </form>
             </section>
         );
     }
 );
 
-export default AboutSection;
+export default ContactSection;
+
 
