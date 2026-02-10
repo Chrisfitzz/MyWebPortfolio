@@ -8,10 +8,11 @@ import ProjectsSection from "../components/ProjectSection";
 import ContactSection from "../components/ContactSection";
 
 export default function Home() {
-    const homeRef = useRef<HTMLDivElement>(null);
-    const aboutRef = useRef<HTMLDivElement>(null);
-    const projectsRef = useRef<HTMLDivElement>(null);
-    const contactRef = useRef<HTMLDivElement>(null);
+    const homeRef = useRef<HTMLDivElement | null>(null);
+    const aboutRef = useRef<HTMLDivElement | null>(null);
+    const projectsRef = useRef<HTMLDivElement | null>(null);
+    const contactRef = useRef<HTMLDivElement | null>(null);
+
 
     const [activeSection, setActiveSection] = useState<string>("home");
 
@@ -51,8 +52,10 @@ export default function Home() {
         return () => observer.disconnect();
     }, [activeSection]);
 
-    const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
-        ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
+        if (ref.current) {
+            ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     };
 
     return (
@@ -78,6 +81,7 @@ export default function Home() {
                     >
                         GO!
                     </button>
+
                 </div>
             </section>
 
