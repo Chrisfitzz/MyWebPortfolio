@@ -24,34 +24,73 @@ export default function GalaxyParticles() {
     };
     window.addEventListener("resize", resize);
 
-    const particles = Array.from({ length: 400 }).map(() => ({
+    // ⭐ Slightly toned-down particle settings
+    const particles = Array.from({ length: 520 }).map(() => ({
       angle: Math.random() * Math.PI * 2,
       radius: Math.random() * Math.min(w, h) * 0.5,
       speed: 0.0005 + Math.random() * 0.0007,
-      size: Math.random() * 1.5 + 0.3,
-      color: Math.random() > 0.9 ? "crimson" : "white",
+      size: Math.random() * 1.6 + 0.6, // smaller than before
+      color:
+          Math.random() > 0.9
+              ? "pink"
+              : Math.random() > 0.8
+                  ? "teal"
+                  : "white",
       twinkleOffset: Math.random() * 1000,
     }));
 
+    const teal = { r: 94, g: 234, b: 212 };
+    const pink = { r: 255, g: 97, b: 136 };
+    const darkStar = { r: 25, g: 25, b: 25 };
+
     const animate = (time: number) => {
       ctx.clearRect(0, 0, w, h);
+
+      const isNegative =
+          document.documentElement.getAttribute("data-theme") === "negative";
 
       particles.forEach((p) => {
         p.angle += p.speed;
         const x = w / 2 + Math.cos(p.angle) * p.radius;
         const y = h / 2 + Math.sin(p.angle) * p.radius;
 
-        const alpha =
-            p.color === "crimson"
-                ? 0.25 + 0.1 * Math.sin(time / 500 + p.twinkleOffset)
-                : 0.15 + 0.05 * Math.sin(time / 700 + p.twinkleOffset);
+        // ⭐ Slightly reduced alpha intensity
+        let base =
+            p.color === "pink"
+                ? 0.28 + 0.16 * Math.sin(time / 500 + p.twinkleOffset)
+                : p.color === "teal"
+                    ? 0.22 + 0.14 * Math.sin(time / 550 + p.twinkleOffset)
+                    : 0.16 + 0.09 * Math.sin(time / 700 + p.twinkleOffset);
+
+        let alpha = Math.max(0, Math.min(1, base));
 
         ctx.beginPath();
         ctx.arc(x, y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle =
-            p.color === "crimson"
-                ? `rgba(230,59,31,${alpha})`
-                : `rgba(255,255,255,${alpha})`;
+
+        if (!isNegative) {
+          // Normal mode
+          if (p.color === "pink") {
+            ctx.fillStyle = `rgba(${pink.r},${pink.g},${pink.b},${alpha})`;
+          } else if (p.color === "teal") {
+            ctx.fillStyle = `rgba(${teal.r},${teal.g},${teal.b},${alpha})`;
+          } else {
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          }
+        } else {
+          // Negative mode (muted, dark tones)
+          if (p.color === "pink") {
+            alpha = Math.min(1, alpha * 1.3);
+            ctx.fillStyle = `rgba(${pink.r},${pink.g},${pink.b},${alpha})`;
+          } else if (p.color === "teal") {
+            const darkTeal = { r: 10, g: 120, b: 110 };
+            alpha = Math.min(1, alpha * 1.3);
+            ctx.fillStyle = `rgba(${darkTeal.r},${darkTeal.g},${darkTeal.b},${alpha})`;
+          } else {
+            alpha = Math.min(1, alpha * 1.4);
+            ctx.fillStyle = `rgba(${darkStar.r},${darkStar.g},${darkStar.b},${alpha})`;
+          }
+        }
+
         ctx.fill();
       });
 

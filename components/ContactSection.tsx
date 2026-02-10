@@ -20,7 +20,7 @@ const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
 
         const handleSubmit = (e: React.FormEvent) => {
             e.preventDefault();
-            alert("Message submitted! (Hook this up to Formspree or email API.)");
+            alert("Message submitted! (Hook this up to Formspree or an email API.)");
             setFormData({ name: "", email: "", message: "" });
         };
 
@@ -30,7 +30,9 @@ const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
                 id={props.id}
                 className="min-h-screen flex flex-col justify-center items-center px-6 bg-[var(--bg-main)]"
             >
-                <h2 className="text-4xl font-bold mb-8 text-[var(--cream)]">Contact</h2>
+                <h2 className="text-4xl font-bold mb-8 text-[var(--cream)]">
+                    Contact
+                </h2>
                 <form
                     onSubmit={handleSubmit}
                     className="flex flex-col gap-4 w-full max-w-lg"
@@ -41,7 +43,7 @@ const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
                         placeholder="Your Name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
+                        className="p-3 bg-[var(--bg-main)] border border-[var(--border)] text-[var(--cream)] focus:outline-none"
                         required
                     />
                     <input
@@ -50,7 +52,7 @@ const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
                         placeholder="Your Email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
+                        className="p-3 bg-[var(--bg-main)] border border-[var(--border)] text-[var(--cream)] focus:outline-none"
                         required
                     />
                     <textarea
@@ -59,7 +61,7 @@ const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
                         value={formData.message}
                         onChange={handleChange}
                         rows={5}
-                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
+                        className="p-3 bg-[var(--bg-main)] border border-[var(--border)] text-[var(--cream)] focus:outline-none"
                         required
                     />
                     <button
@@ -75,4 +77,5 @@ const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
 );
 
 ContactSection.displayName = "ContactSection";
+
 export default ContactSection;

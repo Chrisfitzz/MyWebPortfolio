@@ -2,21 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ================================
+   Normal Theme (Monokai-ish)
+   ================================ */
+
 :root {
-  /* Monokai Base (dark background) */
-  --bg-main: #1e1f1c; /* deep monokai slate */
+  --bg-main: #273136;    /* deep blue-grey */
+  --cream: #f1f1f1;      /* primary text */
+  --muted: #9da0a2;      /* secondary text */
+  --header-bg: rgba(42, 103, 240, 0.78); /* normal mode translucent blue */
 
-  /* Text colors */
-  --cream: #f8f8f2;    /* soft white */
-  --muted: #75715e;    /* muted olive-grey */
-
-  /* Accent colors */
-  --accent: #f92672;   /* monokai pink (strong but elegant) */
-  --accent-yellow: #e6db74;
-  --accent-green: #a6e22e;
-  --accent-blue: #66d9ef;
-
-  /* Borders + subtle UI elements */
-  --border: #3e3d32;
+  --accent: #2a67f0;     /* blue accent */
+  --border: #3b4348;     /* subtle border */
 }
 
+/* ================================
+   Negative Theme (approx. photo invert)
+   ================================ */
+
+html[data-theme="negative"] {
+  --bg-main: #d8cec9;    /* inverted of #273136 */
+  --cream: #0e0e0e;      /* inverted of #f1f1f1 */
+  --muted: #625f5d;      /* inverted of #9da0a2 */
+  --header-bg: #d5980f; /* #E63B1F translucent */
+
+  --accent: #d5980f;     /* inverted of #2a67f0 */
+  --border: #c4bcb7;     /* inverted of #3b4348 */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--cream);
+}

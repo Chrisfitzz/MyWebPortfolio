@@ -15,6 +15,7 @@ export default function Home() {
 
     const [activeSection, setActiveSection] = useState("home");
 
+    // Scroll-spy to track which section is visible
     useEffect(() => {
         const sections = [
             { id: "home", ref: homeRef },
@@ -28,15 +29,23 @@ export default function Home() {
                 const visible = entries
                     .filter((e) => e.isIntersecting)
                     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
                 if (visible) {
                     const found = sections.find((s) => s.ref.current === visible.target);
-                    if (found && activeSection !== found.id) setActiveSection(found.id);
+                    if (found && activeSection !== found.id) {
+                        setActiveSection(found.id);
+                    }
                 }
             },
-            { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
+            {
+                threshold: Array.from({ length: 101 }, (_, i) => i / 100), // 0..1
+            }
         );
 
-        sections.forEach((s) => s.ref.current && observer.observe(s.ref.current));
+        sections.forEach((s) => {
+            if (s.ref.current) observer.observe(s.ref.current);
+        });
+
         return () => observer.disconnect();
     }, [activeSection]);
 

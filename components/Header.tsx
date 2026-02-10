@@ -14,52 +14,63 @@ type HeaderProps = {
 
 export default function Header({ scrollTo, activeSection }: HeaderProps) {
     const [show, setShow] = useState(false);
-    const [theme, setTheme] = useState<"light" | "dark">("light");
 
-    // Show header only after scrolling past hero
+    // Show header only after scrolling past most of the hero
     useEffect(() => {
-        const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.5);
+        const onScroll = () => {
+            const scrolledPastHero = window.scrollY > window.innerHeight * 0.7;
+            setShow(scrolledPastHero);
+        };
+
         window.addEventListener("scroll", onScroll);
+        onScroll(); // run on mount
+
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    // Apply theme to <html data-theme="...">
-    useEffect(() => {
-        if (typeof document !== "undefined") {
-            document.documentElement.setAttribute("data-theme", theme);
-        }
-    }, [theme]);
-
-    const toggleTheme = () =>
-        setTheme((prev) => (prev === "light" ? "dark" : "light"));
-
     const scroll = (ref?: RefObject<HTMLDivElement | null>) => {
-        if (ref?.current) ref.current.scrollIntoView({ behavior: "smooth" });
+        ref?.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     const scrollHome = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
+    // Toggle negative mode by flipping data-theme on <html>
+    const toggleNegativeMode = () => {
+        const html = document.documentElement;
+        const current = html.getAttribute("data-theme");
+        if (current === "negative") html.removeAttribute("data-theme");
+        else html.setAttribute("data-theme", "negative");
+    };
+
     const buttonClass = (section: string) =>
         `transition font-medium ${
             activeSection === section
-                ? "text-[var(--cream)] underline font-semibold"
+                ? "text-[var(--cream)] underline decoration-[var(--accent)] font-semibold"
                 : "text-white hover:text-gray-200"
         }`;
 
-    if (!show) return null;
+    const headerClasses = `
+        fixed top-0 left-0 w-full z-50 transition-all duration-500 
+        ${show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}
+    `;
 
     return (
-        <header className="fixed top-0 left-0 w-full z-50 bg-[var(--accent)] transition-all duration-300">
+        <header
+            className={headerClasses}
+            style={{
+                backgroundColor: "var(--header-bg)",
+                backdropFilter: "blur(8px)",
+            }}
+        >
             <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-8 font-medium">
-                {/* Left: Theme toggle */}
+                {/* Negative mode toggle */}
                 <button
-                    onClick={toggleTheme}
+                    onClick={toggleNegativeMode}
                     className="text-white text-sm border border-white/40 px-3 py-1 hover:bg-white/10 transition"
                 >
-                    {theme === "light" ? "Dark mode" : "Light mode"}
+                    Negative mode
                 </button>
 
-                {/* Right: Nav links */}
                 <div className="flex gap-8">
                     <button onClick={scrollHome} className={buttonClass("home")}>
                         Home
@@ -67,16 +78,10 @@ export default function Header({ scrollTo, activeSection }: HeaderProps) {
                     <button onClick={() => scroll(scrollTo.about)} className={buttonClass("about")}>
                         About
                     </button>
-                    <button
-                        onClick={() => scroll(scrollTo.projects)}
-                        className={buttonClass("projects")}
-                    >
+                    <button onClick={() => scroll(scrollTo.projects)} className={buttonClass("projects")}>
                         Projects
                     </button>
-                    <button
-                        onClick={() => scroll(scrollTo.contact)}
-                        className={buttonClass("contact")}
-                    >
+                    <button onClick={() => scroll(scrollTo.contact)} className={buttonClass("contact")}>
                         Contact
                     </button>
                 </div>

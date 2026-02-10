@@ -36,12 +36,14 @@ const ProjectSection = forwardRef<HTMLDivElement, ProjectSectionProps>(
               id={props.id}
               className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-[var(--bg-main)]"
           >
-            <h2 className="text-4xl font-bold mb-8 text-[var(--cream)]">Projects</h2>
+            <h2 className="text-4xl font-bold mb-8 text-[var(--cream)]">
+              Projects
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
               {sampleProjects.map((project, idx) => (
                   <div
                       key={idx}
-                      className="bg-[var(--bg-main)] border border-[var(--muted)] p-6 rounded-md hover:scale-105 transition-transform"
+                      className="bg-[var(--bg-main)] border border-[var(--border)] p-6 rounded-md hover:scale-105 transition-transform"
                   >
                     <h3 className="text-xl font-semibold mb-2 text-[var(--cream)]">
                       {project.title}
