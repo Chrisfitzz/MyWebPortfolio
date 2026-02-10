@@ -3,14 +3,16 @@
 import { useEffect, useRef } from "react";
 
 export default function GalaxyParticles() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
     let w = window.innerWidth;
     let h = window.innerHeight;
-
     canvas.width = w;
     canvas.height = h;
 
@@ -22,13 +24,12 @@ export default function GalaxyParticles() {
     };
     window.addEventListener("resize", resize);
 
-    // Increased particle count slightly
-    const particles = Array.from({ length: 500 }).map(() => ({
+    const particles = Array.from({ length: 400 }).map(() => ({
       angle: Math.random() * Math.PI * 2,
       radius: Math.random() * Math.min(w, h) * 0.5,
-      speed: 0.0003 + Math.random() * 0.0006,
-      size: Math.random() * 1.2 + 0.3,
-      color: Math.random() > 0.9 ? "crimson" : "white", // slightly more crimson
+      speed: 0.0005 + Math.random() * 0.0007,
+      size: Math.random() * 1.5 + 0.3,
+      color: Math.random() > 0.9 ? "crimson" : "white",
       twinkleOffset: Math.random() * 1000,
     }));
 
@@ -40,21 +41,17 @@ export default function GalaxyParticles() {
         const x = w / 2 + Math.cos(p.angle) * p.radius;
         const y = h / 2 + Math.sin(p.angle) * p.radius;
 
-        // Twinkle effect, more dramatic
         const alpha =
             p.color === "crimson"
-                ? 0.25 + 0.15 * Math.sin(time / 400 + p.twinkleOffset) // base brighter, bigger swing
-                : 0.18 + 0.1 * Math.sin(time / 600 + p.twinkleOffset);
-
-        // Make crimson particles slightly bigger
-        const size = p.color === "crimson" ? p.size * 1.5 : p.size;
+                ? 0.25 + 0.1 * Math.sin(time / 500 + p.twinkleOffset)
+                : 0.15 + 0.05 * Math.sin(time / 700 + p.twinkleOffset);
 
         ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.arc(x, y, p.size, 0, Math.PI * 2);
         ctx.fillStyle =
             p.color === "crimson"
-                ? `rgba(230, 59, 31, ${alpha})`
-                : `rgba(255, 255, 255, ${alpha})`;
+                ? `rgba(230,59,31,${alpha})`
+                : `rgba(255,255,255,${alpha})`;
         ctx.fill();
       });
 
@@ -62,7 +59,6 @@ export default function GalaxyParticles() {
     };
 
     requestAnimationFrame(animate);
-
     return () => window.removeEventListener("resize", resize);
   }, []);
 

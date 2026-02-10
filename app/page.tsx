@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import Header from "../components/Header";
 import GalaxyParticles from "../components/GalaxyParticles";
 import AboutSection from "../components/AboutSection";
-import ProjectsSection from "../components/ProjectSection";
+import ProjectSection from "../components/ProjectSection";
 import ContactSection from "../components/ContactSection";
 
 export default function Home() {
@@ -13,10 +13,8 @@ export default function Home() {
     const projectsRef = useRef<HTMLDivElement | null>(null);
     const contactRef = useRef<HTMLDivElement | null>(null);
 
+    const [activeSection, setActiveSection] = useState("home");
 
-    const [activeSection, setActiveSection] = useState<string>("home");
-
-    // Scroll-spy to highlight active section in header
     useEffect(() => {
         const sections = [
             { id: "home", ref: homeRef },
@@ -30,32 +28,20 @@ export default function Home() {
                 const visible = entries
                     .filter((e) => e.isIntersecting)
                     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
                 if (visible) {
-                    const found = sections.find(
-                        (section) => section.ref.current === visible.target
-                    );
-                    if (found && activeSection !== found.id) {
-                        setActiveSection(found.id);
-                    }
+                    const found = sections.find((s) => s.ref.current === visible.target);
+                    if (found && activeSection !== found.id) setActiveSection(found.id);
                 }
             },
-            {
-                threshold: Array.from({ length: 101 }, (_, i) => i / 100),
-            }
+            { threshold: Array.from({ length: 101 }, (_, i) => i / 100) }
         );
 
-        sections.forEach((section) => {
-            if (section.ref.current) observer.observe(section.ref.current);
-        });
-
+        sections.forEach((s) => s.ref.current && observer.observe(s.ref.current));
         return () => observer.disconnect();
     }, [activeSection]);
 
     const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
-        if (ref.current) {
-            ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
     return (
@@ -64,7 +50,7 @@ export default function Home() {
             <section
                 ref={homeRef}
                 id="home"
-                className="relative h-screen flex flex-col justify-center items-center text-center bg-[var(--bg-main)] scroll-snap-start"
+                className="relative h-screen flex flex-col justify-center items-center text-center bg-[var(--bg-main)]"
             >
                 <GalaxyParticles />
                 <div className="relative z-10">
@@ -74,14 +60,12 @@ export default function Home() {
                     <p className="text-xl mb-8 text-[var(--muted)] max-w-2xl">
                         Frontend Engineer building modern web experiences.
                     </p>
-
                     <button
                         onClick={() => scrollToSection(aboutRef)}
                         className="px-8 py-3 bg-[var(--accent)] text-white font-medium hover:bg-black transition"
                     >
                         GO!
                     </button>
-
                 </div>
             </section>
 
@@ -98,7 +82,7 @@ export default function Home() {
 
             {/* Sections */}
             <AboutSection ref={aboutRef} id="about" />
-            <ProjectsSection ref={projectsRef} id="projects" />
+            <ProjectSection ref={projectsRef} id="projects" />
             <ContactSection ref={contactRef} id="contact" />
         </div>
     );

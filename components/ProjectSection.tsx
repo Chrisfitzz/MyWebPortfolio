@@ -26,17 +26,15 @@ const sampleProjects: Project[] = [
   },
 ];
 
-interface ProjectsSectionProps {
-  id?: string;
-}
+type ProjectSectionProps = { id?: string };
 
-const ProjectsSection = forwardRef<HTMLDivElement, ProjectsSectionProps>(
+const ProjectSection = forwardRef<HTMLDivElement, ProjectSectionProps>(
     (props, ref) => {
       return (
           <section
               ref={ref}
               id={props.id}
-              className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-[var(--bg-main)] scroll-snap-start"
+              className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-[var(--bg-main)]"
           >
             <h2 className="text-4xl font-bold mb-8 text-[var(--cream)]">Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
@@ -65,5 +63,6 @@ const ProjectsSection = forwardRef<HTMLDivElement, ProjectsSectionProps>(
     }
 );
 
-export default ProjectsSection;
+ProjectSection.displayName = "ProjectSection";
 
+export default ProjectSection;

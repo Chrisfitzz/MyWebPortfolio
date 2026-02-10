@@ -1,83 +1,47 @@
 "use client";
 
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
+import { ArrowUpRight } from "lucide-react";
 
-interface ContactSectionProps {
-    id?: string;
-}
+type AboutSectionProps = { id?: string };
 
-const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
-    (props, ref) => {
-        const [formData, setFormData] = useState({
-            name: "",
-            email: "",
-            message: "",
-        });
+const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>((props, ref) => {
+    return (
+        <section
+            ref={ref}
+            id={props.id}
+            className="h-screen flex flex-col justify-center items-center text-center px-6 bg-[var(--bg-main)]"
+        >
+            <h2 className="text-4xl font-bold mb-6 text-[var(--cream)]">About Me</h2>
+            <p className="max-w-3xl text-[var(--muted)] leading-relaxed">
+                Hi! I’m Chris, a frontend engineer with a background in design and
+                education. I enjoy building modern, user-focused web experiences using
+                React, Next.js, and TypeScript.
+                <br />
+                <br />
+                I care about clean structure, usability, and subtle, meaningful
+                interactions. I like collaborating across disciplines, explaining
+                complex ideas clearly, and iterating on solutions.
+                <br />
+                <br />
+                When I’m not coding, you’ll find me DJing, taking photographs or having
+                coffee with friends — all of which feed back into how I think about
+                people, storytelling, and product design.
+            </p>
 
-        const handleChange = (
-            e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-        ) => {
-            setFormData({ ...formData, [e.target.name]: e.target.value });
-        };
-
-        const handleSubmit = (e: React.FormEvent) => {
-            e.preventDefault();
-            alert(
-                "Message submitted! (In a real app, this would send an email.)"
-            );
-            setFormData({ name: "", email: "", message: "" });
-        };
-
-        return (
-            <section
-                ref={ref}
-                id={props.id}
-                className="min-h-screen flex flex-col justify-center items-center px-6 bg-[var(--bg-main)] scroll-snap-start"
+            {/* CV link */}
+            <a
+                href="/MyCV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 text-[var(--accent)] font-medium hover:text-red-700 transition"
             >
-                <h2 className="text-4xl font-bold mb-8 text-[var(--cream)]">Contact</h2>
-                <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col gap-4 w-full max-w-lg"
-                >
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Your Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
-                        required
-                    />
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Your Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
-                        required
-                    />
-                    <textarea
-                        name="message"
-                        placeholder="Your Message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        rows={5}
-                        className="p-3 bg-[var(--bg-main)] border border-[var(--muted)] text-[var(--cream)] focus:outline-none"
-                        required
-                    />
-                    <button
-                        type="submit"
-                        className="px-6 py-3 bg-[var(--accent)] text-white font-medium hover:bg-black transition"
-                    >
-                        Send Message
-                    </button>
-                </form>
-            </section>
-        );
-    }
-);
+                View CV
+                <ArrowUpRight size={18} />
+            </a>
+        </section>
+    );
+});
 
-export default ContactSection;
-
-
+AboutSection.displayName = "AboutSection";
+export default AboutSection;
