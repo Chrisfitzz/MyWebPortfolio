@@ -1,44 +1,43 @@
-##Chris Fitzgerald
+# Chris Fitzgerald
 
-![Portfolio Preview](public/preview.png)
-
+![Portfolio Preview](preview.png)
 
 A personal portfolio built with Next.js.
 
-The goal was to create something subtle and well-structured — clean spacing, effective motion, and thoughtful interaction. 
+The goal was to create something subtle and well-structured — clean spacing, effective motion, and thoughtful interaction.  
 
-##Stack
 
-Next.js 15
+---
 
-React 19
+## Stack
 
-TypeScript
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Deployed on Vercel
 
-Tailwind CSS
+---
 
-Deployed on Vercel
+## Notes
 
-##Notes
+This project uses the App Router architecture and focuses on:
 
-The project uses the App Router architecture and focuses on:
-
--  Lightweight structure
-
--  Clean component separation
-
--  Responsive layout
-
--  Subtle motion and scroll behavior
-
--  Maintainable, readable code
+- Lightweight structure
+- Clean component separation
+- Responsive layout
+- Subtle motion and scroll behavior
+- Maintainable, readable code
 
 It’s designed to feel natural rather than animated for the sake of animation.
 
-##Running Locally
+---
+
+## Running Locally
 
 Clone the repository:
 
+```bash
 git clone https://github.com/Chrisfitzz/MyWebPortfolio.git
 cd MyWebPortfolio
 
@@ -56,11 +55,13 @@ Then open:
 
 http://localhost:3000
 
-##Production Build
+## Production Build
+
 npm run build
+
 npm start
 
-##Deployment
+## Deployment
 
 The project is deployed on Vercel.
 
@@ -69,3 +70,6 @@ Contact
 GitHub: https://github.com/Chrisfitzz
 
 LinkedIn: https://www.linkedin.com/in/chrisfitzzz/
+
+
+
