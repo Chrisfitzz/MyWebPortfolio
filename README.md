@@ -5,7 +5,7 @@
 A personal portfolio built with Next.js.
 
 The goal was to create something subtle and well-structured — clean spacing, effective motion, and thoughtful interaction.  
-
+Nothing excessive. Just clarity and intention.
 
 ---
 
@@ -40,36 +40,48 @@ Clone the repository:
 ```bash
 git clone https://github.com/Chrisfitzz/MyWebPortfolio.git
 cd MyWebPortfolio
+```
 
 Install dependencies:
 
+```bash
 npm install
-
+```
 
 Start the development server:
 
+```bash
 npm run dev
-
+```
 
 Then open:
 
+```
 http://localhost:3000
+```
+
+---
 
 ## Production Build
 
+```bash
 npm run build
-
 npm start
+```
+
+---
 
 ## Deployment
 
 The project is deployed on Vercel.
 
-Contact
+---
 
-GitHub: https://github.com/Chrisfitzz
+## Contact
 
+GitHub: https://github.com/Chrisfitzz  
 LinkedIn: https://www.linkedin.com/in/chrisfitzzz/
+
 
 
 
