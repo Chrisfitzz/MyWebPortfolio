@@ -5,7 +5,7 @@
 A personal portfolio built with Next.js.
 
 The goal was to create something subtle and well-structured — clean spacing, effective motion, and thoughtful interaction.  
-Nothing excessive. Just clarity and intention.
+
 
 ---
 
