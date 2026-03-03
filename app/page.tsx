@@ -31,9 +31,13 @@ export default function Home() {
                     .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
                 if (visible) {
-                    const found = sections.find((s) => s.ref.current === visible.target);
-                    if (found && activeSection !== found.id) {
-                        setActiveSection(found.id);
+                    const found = sections.find(
+                        (s) => s.ref.current === visible.target
+                    );
+                    if (found) {
+                        setActiveSection((prev) =>
+                            prev === found.id ? prev : found.id
+                        );
                     }
                 }
             },
@@ -47,7 +51,7 @@ export default function Home() {
         });
 
         return () => observer.disconnect();
-    }, [activeSection]);
+    }, []);
 
     const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
         ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -59,14 +63,15 @@ export default function Home() {
             <section
                 ref={homeRef}
                 id="home"
-                className="relative h-screen flex flex-col justify-center items-center text-center bg-[var(--bg-main)]"
+                className="relative min-h-screen snap-start flex flex-col justify-center items-center text-center bg-[var(--bg-main)]"
             >
                 <GalaxyParticles />
                 <div className="relative z-10">
-                    <h1 className="text-6xl font-bold mb-4 text-[var(--cream)] tracking-tight">
+                    <h1 className="text-[3.75rem] md:text-[4.5rem] font-medium leading-[1.05] tracking-[-0.03em] text-[#111] mb-6">
                         Chris Fitzgerald
                     </h1>
-                    <p className="text-xl mb-8 text-[var(--muted)] max-w-2xl">
+
+                    <p className="text-xl md:text-2xl text-[#1a1a1a]/80 max-w-2xl leading-snug mb-10">
                         Frontend Engineer building modern web experiences.
                     </p>
                     <button

@@ -34,54 +34,47 @@ export default function Header({ scrollTo, activeSection }: HeaderProps) {
 
     const scrollHome = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // Toggle negative mode by flipping data-theme on <html>
-    const toggleNegativeMode = () => {
-        const html = document.documentElement;
-        const current = html.getAttribute("data-theme");
-        if (current === "negative") html.removeAttribute("data-theme");
-        else html.setAttribute("data-theme", "negative");
-    };
-
     const buttonClass = (section: string) =>
-        `transition font-medium ${
+        `transition ${
             activeSection === section
-                ? "text-[var(--cream)] underline decoration-[var(--accent)] font-semibold"
-                : "text-white hover:text-gray-200"
+                ? "text-[var(--cream)] decoration-[var(--accent)] font-bold"
+                : "text-white hover:text-gray-200 font-medium"
         }`;
 
     const headerClasses = `
-        fixed top-0 left-0 w-full z-50 transition-all duration-500 
-        ${show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}
-    `;
+    fixed top-0 left-0 w-full z-50 transition-all duration-500 
+    ${show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"}
+  `;
 
     return (
         <header
             className={headerClasses}
             style={{
-                backgroundColor: "var(--header-bg)",
+                backgroundColor: "var(--accent)", // same as the Send Message button
                 backdropFilter: "blur(8px)",
             }}
         >
-            <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-8 font-medium">
-                {/* Negative mode toggle */}
-                <button
-                    onClick={toggleNegativeMode}
-                    className="text-white text-sm border border-white/40 px-3 py-1 hover:bg-white/10 transition"
-                >
-                    Negative mode
-                </button>
-
+            <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-end gap-8 font-medium">
                 <div className="flex gap-8">
                     <button onClick={scrollHome} className={buttonClass("home")}>
                         Home
                     </button>
-                    <button onClick={() => scroll(scrollTo.about)} className={buttonClass("about")}>
+                    <button
+                        onClick={() => scroll(scrollTo.about)}
+                        className={buttonClass("about")}
+                    >
                         About
                     </button>
-                    <button onClick={() => scroll(scrollTo.projects)} className={buttonClass("projects")}>
+                    <button
+                        onClick={() => scroll(scrollTo.projects)}
+                        className={buttonClass("projects")}
+                    >
                         Projects
                     </button>
-                    <button onClick={() => scroll(scrollTo.contact)} className={buttonClass("contact")}>
+                    <button
+                        onClick={() => scroll(scrollTo.contact)}
+                        className={buttonClass("contact")}
+                    >
                         Contact
                     </button>
                 </div>

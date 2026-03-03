@@ -11,28 +11,26 @@ const AboutSection = forwardRef<HTMLDivElement, AboutSectionProps>(
             <section
                 ref={ref}
                 id={props.id}
-                className="h-screen flex flex-col justify-center items-center text-center px-6 bg-[var(--bg-main)]"
+                className="min-h-screen snap-start flex flex-col justify-center items-center text-center px-6 bg-[var(--bg-main)]"
             >
-                <h2 className="text-4xl font-bold mb-6 text-[var(--cream)]">
+                <h2 className="text-[2.25rem] md:text-[2.75rem] font-semibold tracking-[-0.02em] leading-[1.1] text-[#111] mb-6">
                     About Me
                 </h2>
-                <p className="max-w-3xl text-[var(--muted)] leading-relaxed">
-                    Hi! I’m Chris, a frontend engineer with a background in design and
-                    education. I enjoy building modern, user-focused web experiences using
-                    React, Next.js, and TypeScript.
+
+                <p className="max-w-3xl text-[1.1rem] md:text-[1.25rem] text-[#1a1a1a]/85 leading-relaxed md:leading-[1.75] text-left">
+                    I’m Chris, a web developer who likes making clean, thoughtful websites. I work with React and Next.js,
+                    and I’m drawn to projects with good design, clear structure and nice details.
                     <br />
                     <br />
-                    I care about clean structure, usability, and subtle, meaningful
-                    interactions. I like collaborating across disciplines, explaining
-                    complex ideas clearly, and iterating on solutions.
+                    I care about structure, typography and the tiny details that make something feel “right.”
+                    I like working with people who enjoy the process — the back-and-forth, the little tweaks,
+                    the moment when an idea finally clicks into place.
                     <br />
                     <br />
-                    When I’m not coding, you’ll find me DJing, taking photographs or
-                    having coffee with friends — all of which feed back into how I think
-                    about people, storytelling, and product design.
+                    A lot of my inspiration comes from outside tech: music, photography, record sleeves, crime films, graphic design.
+                    When I’m not building something, I’m usually watching films, hiking, meditating, reading or just hanging out with friends.
                 </p>
 
-                {/* CV link (blue accent) */}
                 <a
                     href="/MyCV.pdf"
                     target="_blank"
