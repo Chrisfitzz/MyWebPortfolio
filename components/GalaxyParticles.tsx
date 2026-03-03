@@ -38,7 +38,6 @@ export default function GalaxyParticles() {
       twinkleOffset: Math.random() * 1000,
     }));
 
-    const teal = { r: 94, g: 234, b: 212 };
     const pink = { r: 255, g: 97, b: 136 };
     const darkStar = { r: 25, g: 25, b: 25 };
     const darkTeal = { r: 10, g: 120, b: 110 };

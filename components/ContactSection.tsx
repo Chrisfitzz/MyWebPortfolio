@@ -52,9 +52,13 @@ const ContactSection = forwardRef<HTMLDivElement, ContactSectionProps>(
 
                 setStatus("success");
                 setFormData({ name: "", email: "", message: "" });
-            } catch (err: any) {
+            } catch (err: unknown) {
                 setStatus("error");
-                setError(err?.message ?? "Something went wrong");
+
+                const message =
+                    err instanceof Error ? err.message : "Something went wrong";
+
+                setError(message);
             }
         };
 
