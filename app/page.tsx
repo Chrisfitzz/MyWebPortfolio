@@ -72,7 +72,7 @@ export default function Home() {
                     </h1>
 
                     <p className="text-xl md:text-2xl text-[#1a1a1a]/80 max-w-2xl leading-snug mb-10">
-                        Frontend Engineer building modern web experiences.
+                        Software Engineer building modern web experiences.
                     </p>
                     <button
                         onClick={() => scrollToSection(aboutRef)}
