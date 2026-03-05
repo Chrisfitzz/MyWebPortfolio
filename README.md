@@ -1,6 +1,6 @@
 # Chris Fitzgerald
 
-<img src="preview.png" width="500">
+<img src="preview.png" width="700">
 
 ## Check it out here: 
 
