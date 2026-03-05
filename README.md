@@ -1,6 +1,10 @@
 # Chris Fitzgerald
 
-![Portfolio Preview](preview.png)
+<img src="preview.png" width="500">
+
+## Check it out here: 
+
+https://chrisfitzgerald.dev/
 
 A personal portfolio built with Next.js.
 
